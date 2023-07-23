@@ -60,20 +60,16 @@ export default class SocketUser extends User{
     })
     
     getServerList = () => new Promise((resolve, reject) => {
-        fs.readdir(serverDir, null, (err, serverPathNames)=>{
-            if(err){
-                throw errors.serverDirNotFound
-            }
+        const serverPathNames = fs.readdirSync(serverDir)
 
-            const servers = serverPathNames.map((serverPathName) =>
-                MinecraftServer.readFromPathName(serverPathName).vignette()
-            )
+        const servers = serverPathNames.map((serverPathName) =>
+            MinecraftServer.readFromPathName(serverPathName).vignette()
+        )
 
-            resolve({
-                public: servers.filter((server)=> server.visibility == "public"),
-                mine: servers.filter((server)=> server.owner?.id == this.id),
-                sharedWithMe: []//servers.filter((server)=> server.visibility == "public")
-            })
+        resolve({
+            public: servers.filter((server)=> server.visibility == "public"),
+            mine: servers.filter((server)=> server.owner?.id == this.id),
+            sharedWithMe: []//servers.filter((server)=> server.visibility == "public")
         })
     })
 
