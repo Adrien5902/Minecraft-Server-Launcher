@@ -1,6 +1,6 @@
 {
   "name": "minecraft-server-launcher-back-end",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "",
   "main": "src/index.js",
   "scripts": {
@@ -8,8 +8,15 @@
     "dev": "nodemon server.js --ignore ./servers/"
   },
   "type": "module",
-  "author": "Adrien5902",
-  "license": "ISC",
+  "author": {
+    "name" : "Adrien5902",
+    "email" : "adrien.m5902@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Adrien5902/Minecraft-Server-Launcher.git"
+  },
+  "license": "MIT",
   "dependencies": {
     "ath": "^1.0.0",
     "cors": "^2.8.5",

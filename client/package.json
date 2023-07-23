@@ -1,6 +1,6 @@
 {
   "name": "minecraft-sever-launcher",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "",
   "main": "src/load.js",
   "scripts": {
@@ -8,8 +8,15 @@
     "make": "electron-forge make",
     "dev": "concurrently \"react-scripts start\" \"nodemon --watch src/load.js --exec electron-forge start\""
   },
-  "author": "Adrien5902",
-  "license": "ISC",
+  "author": {
+    "name": "Adrien5902",
+    "email": "adrien.m5902@gmail.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Adrien5902/Minecraft-Server-Launcher.git"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "@fortawesome/free-brands-svg-icons": "^6.4.0",
@@ -19,7 +26,6 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "babel-plugin-macros": "^3.1.0",
-    "electron": "^25.2.0",
     "electron-is-dev": "^2.0.0",
     "electron-store": "^8.1.0",
     "react": "^18.2.0",
@@ -35,7 +41,7 @@
     "@electron-forge/cli": "^6.2.1",
     "@electron-forge/maker-squirrel": "",
     "concurrently": "^8.2.0",
-    "electron": "^25.2.0",
+    "electron": "^25.3.1",
     "nodemon": "^3.0.1"
   },
   "browserslist": {
