@@ -3,10 +3,12 @@
   "version": "0.0.0",
   "description": "",
   "main": "src/load.js",
+  "productName": "Adrien5902 Minecraft Server Launcher",
   "scripts": {
     "start": "electron-forge start",
     "make": "electron-forge make",
-    "dev": "concurrently \"react-scripts start\" \"nodemon --watch src/load.js --exec electron-forge start\""
+    "dev": "concurrently \"react-scripts start\" \"nodemon --watch src/load.js --exec electron-forge start\"",
+    "build": "react-scripts build"
   },
   "author": {
     "name": "Adrien5902",
@@ -17,6 +19,7 @@
     "type": "git",
     "url": "https://github.com/Adrien5902/Minecraft-Server-Launcher.git"
   },
+  "homepage": "./",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "@fortawesome/free-brands-svg-icons": "^6.4.0",
@@ -34,6 +37,7 @@
     "socket.io-client": "^4.7.1"
   },
   "devDependencies": {
+    "@babel/cli": "^7.22.9",
     "@babel/core": "^7.22.9",
     "@babel/plugin-proposal-private-property-in-object": "",
     "@babel/preset-env": "^7.22.9",

@@ -64,7 +64,7 @@ function createWindow (loadType, pathToLoad, nodeIntegration = false, size = {x:
 
 /** @type {BrowserWindow | undefined} */
 function connectionFailed() {
-    createWindow("file", isDev ? "./public/connection_failed.html" : path.join(__dirname, 'build', 'connection_failed.html'), true, {x: 340, y: 420}, false)
+    createWindow("file", isDev ? "./public/connection_failed.html" : path.join(__dirname, '../build', 'connection_failed.html'), true, {x: 340, y: 420}, false)
     socket.once("connect", () => {
         openApp()
     });
@@ -81,7 +81,7 @@ ipcMain.on("close", ()=>{
 function createMainWin(){
     let mainWin = createWindow(
         isDev ? "url" : "file",
-        isDev ? "http://localhost:3000/index.html" : path.join(__dirname, 'build', 'index.html'),
+        isDev ? "http://localhost:3000/index.html" : path.join(__dirname, '../build', 'index.html'),
         true
     )
 

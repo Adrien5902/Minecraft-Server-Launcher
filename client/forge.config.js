@@ -1,7 +1,14 @@
 module.exports = {
     packagerConfig: {
-      asar: true,
+      asar: false,
       icon: "path/to/app-icon.ico",
+      asarUnpack: [
+        ".gitignore",
+        "*.config.js",
+        ".env",
+        "public/",
+        "**/src/!(load.js)"
+      ],
     },
     makers: [
       {
