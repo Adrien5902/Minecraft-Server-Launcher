@@ -1,0 +1,48 @@
+button{
+    color: var(--textColor);
+    background: var(--color);
+    margin: 0.5em;
+    transition: all 200ms ease;
+    cursor: pointer;
+    font-size: 1.5rem;
+    border-radius: .6em;
+    background-clip: padding-box;
+    transform-origin: 100% 100%;
+    font-family: inherit;
+    outline: 0;
+    padding: .6em;
+    border: 0;
+    position: relative;
+    font-weight: bold;
+    user-select: none;
+    z-index: 3;
+    color: white;
+    
+    &:hover{
+        filter: brightness(0.9);
+    }
+
+    &::before{
+        transition: inherit;
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        box-shadow: var(--color) 4px 4px 0 8px;
+        filter: brightness(0.8);
+        z-index: 2;
+        border-radius: inherit;
+    }
+
+    &:active{
+        margin-bottom: calc(0.5em - 16px);
+        margin-top: calc(0.5em + 16px);
+        transform: translate(8px, -4px);
+
+        &::before{
+            box-shadow: var(--color) 2px 2px 0 4px;
+        }
+    }
+}

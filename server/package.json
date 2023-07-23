@@ -1,0 +1,28 @@
+{
+  "name": "minecraft-server-launcher-back-end",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node .",
+    "dev": "nodemon server.js --ignore ./servers/"
+  },
+  "type": "module",
+  "author": "Adrien5902",
+  "license": "ISC",
+  "dependencies": {
+    "ath": "^1.0.0",
+    "cors": "^2.8.5",
+    "curseforge-api": "^1.1.0",
+    "discord-oauth2": "^2.11.0",
+    "http": "^0.0.1-security",
+    "node-fetch": "^3.3.1",
+    "path": "^0.12.7",
+    "properties-file": "^3.2.10",
+    "sharp": "^0.32.3",
+    "socket.io": "^4.7.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

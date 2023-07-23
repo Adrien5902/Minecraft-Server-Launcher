@@ -1,0 +1,13 @@
+.server-list{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: row;
+    align-content: center;
+}
+
+h2{
+    margin-top: 2em;
+    margin-bottom: 0;
+}

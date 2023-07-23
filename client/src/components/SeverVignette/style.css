@@ -1,0 +1,40 @@
+.server-vignette{
+    font-size: 1.6rem;
+    font-family: 'Ubuntu', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: clamp(12em, 25%, 15em);
+    margin: 1em;
+    background: var(--primary);
+    cursor: pointer;
+    padding: .6em;
+    border-radius: 12px;
+    transition: all 500ms ease;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    & span {
+        display: block;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    & img{
+        max-height: 3em;
+        border-radius: 0.3em;
+    }
+
+    &:hover{
+        transform: scale(1.1);
+        box-shadow: var(--primary) 0 0 2.2em .7em;
+    }
+}
+
+.server-vignette-text{
+    text-align: right;
+}
+
+.server-vignette-owner{
+    font-size: .7em;
+    opacity: .5;
+}

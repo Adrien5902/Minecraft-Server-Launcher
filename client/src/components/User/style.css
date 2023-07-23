@@ -1,0 +1,31 @@
+.user{
+    display: inline-flex;
+    border-radius: 0.5em;
+    background-color: var(--primary);
+    align-items: center;
+    justify-content: center;
+    padding: .5em;
+    margin: 12px;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.pfp{
+    border-radius: 100%;
+    margin-right: 12px;
+    height: 3em;
+}
+
+.user-text-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.global-name{
+    font-weight: bold;
+}
+
+.username{
+    opacity: .5;
+    font-size: .7em;
+}

@@ -1,0 +1,29 @@
+#content{
+    user-select: text;
+}
+
+h1{
+    font-size: 4rem;
+    margin-bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & img {
+        height: 1.5em;
+        margin-right: .2em;
+        border-radius: 0.3em;
+    }
+}
+
+.owner{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 12px;
+
+    & span{
+        font-weight: bold;
+        font-size: 1.2rem;
+    }
+}

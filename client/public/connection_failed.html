@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../src/index.css">
+    <link rel="stylesheet" href="../src/components/Button/style.css">
+
+    <style>
+        #icon{
+            margin-top: 5vh;
+            height: 40vh;
+        }
+</style>
+</head>
+
+<body>
+    <div id="app">
+        <img src="assets/mc-icon.webp" id="icon">
+        <h2>Échec de connexion au serveur 😭</h2>
+        <br>
+        <div style="display: inline-flex;">
+            <button id="close" style="--color: red;">Fermer</button>
+            <button id="retry" style="--color: lime;">Rééssayer</button>
+        </div>
+    </div>
+    
+    <script>
+        const {ipcRenderer} = require("electron")
+
+        document.getElementById("close").onclick = () => {
+            ipcRenderer.send("close")
+        }
+
+        document.getElementById("retry").onclick = () => {
+            document.getElementById("icon").classList.add("bounce")
+            ipcRenderer.send("retry")
+        }
+    </script>
+</body>
+
+</html>
