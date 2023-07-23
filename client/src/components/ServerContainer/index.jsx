@@ -45,10 +45,14 @@ export default function ServerContainer({serverPathName, developperMode, current
                 
                 {developperMode ? <h3><FontAwesomeIcon icon={solid("id-card")}/> Id du serveur : {serverVignette?.pathName}</h3> : ""}
                 
+                {
+                serverVignette.owner ?
                 <div className="owner">
                     <span>Par : </span>
                     {serverVignette ? <User userData={serverVignette.owner} currentUserId={currentUserId}/> : <Loading/>}
                 </div>
+                : ""
+                }
                 
                 {
                 currentOnServer === undefined ? <Loading></Loading> :
