@@ -1,14 +1,13 @@
 import Header from "./Header";
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo, useMemo } from "react";
+import { Routes, Route } from 'react-router-dom';
 
 import ServerList from "./ServerList";
-import ServerContainer from "./ServerContainer";
+import ManageServer from "./ManageServer";
 import Account from "./Account"
 const { ipcRenderer } = window.require("electron");
 
 function App() {
-    const [page, displayPage] = useState("server-list")
-    const [currentServerPathName, setCurrentServerPathName] = useState(null)
     const [userData, setUserData] = useState(null)
 
     function setting(setting, defaultValue){
@@ -34,25 +33,17 @@ function App() {
         setUserData(ipcRenderer.sendSync("getUserData"))
     }, [])
 
-    const pages = {
-        "server-list": (
-            <ServerList displayPage={displayPage} setCurrentServerPathName={setCurrentServerPathName}></ServerList>
-        ),
-        "create-server": (
-            <>+</>
-        ),
-        "account": (
-            <Account lightTheme={lightTheme} setTheme={setLightTheme} developperMode={developperMode} setDevelopperMode={setDevelopperMode} userData={userData}></Account>
-        ),
-        "server":(
-            <ServerContainer developperMode={developperMode} serverPathName={currentServerPathName} currentUserId={userData?.id}></ServerContainer>
-        )
-    }
+    // const memoRoutes = useMemo(()=>(
+    // ), [lightTheme, developperMode, userData])
 
     return (
         <div id="app" lighttheme={String(lightTheme)}>
-            <Header displayPage={displayPage} page={page}></Header>
-            <div id="content">{pages[page]}</div>
+            <Header></Header>
+            <Routes>
+                <Route path="/" element={<ServerList></ServerList>}></Route>
+                <Route path="account" element={<Account lightTheme={lightTheme} setTheme={setLightTheme} developperMode={developperMode} setDevelopperMode={setDevelopperMode} userData={userData}></Account>}></Route>
+                <Route path="server" element={<ManageServer developperMode={developperMode} currentUserId={userData?.id}></ManageServer>}></Route>
+            </Routes>
         </div>
     );
 }

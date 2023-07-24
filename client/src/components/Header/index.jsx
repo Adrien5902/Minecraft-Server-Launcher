@@ -1,8 +1,8 @@
 import './style.css'
-import HeaderButton from '../HeaderButton'
+import HeaderButton from './HeaderButton'
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
 
-export default function Header({displayPage, page}){
+export default function Header(){
     return (
     <header>
         <div>
@@ -20,27 +20,21 @@ export default function Header({displayPage, page}){
                 color="white"
                 icon={solid("list")}
                 text="Liste des serveurs"
-                href="server-list"
-                displayPage={displayPage}
-                page={page}
+                to="/"
             ></HeaderButton>
 
             <HeaderButton
                 color="var(--accent)"
                 icon={solid("plus")}
                 text="Créer un serveur"
-                href="create-server"
-                displayPage={displayPage}
-                page={page}
+                to="create-server"
             ></HeaderButton>
 
             <HeaderButton
                 color="var(--secondary)"
                 icon={solid("user")}
                 text="Mon compte"
-                href="account"
-                displayPage={displayPage}
-                page={page}
+                to="account"
             ></HeaderButton>
         </div>
     </header>

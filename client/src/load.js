@@ -81,9 +81,11 @@ ipcMain.on("close", ()=>{
 function createMainWin(){
     let mainWin = createWindow(
         isDev ? "url" : "file",
-        isDev ? "http://localhost:3000/index.html" : path.join(__dirname, '../build', 'index.html'),
+        isDev ? "http://localhost:3000/index.html" : path.join(__dirname, '../build'),
         true
     )
+
+    mainWin.maximize()
 
     ipcMain.once('log-out', (ipcEvent) => {
         store.delete("discord-token")
@@ -140,7 +142,8 @@ const oauthUrl =
 
 function discordAuth(){
     if(socket.connected) socket.disconnect()
-    let authWin = createWindow("url", oauthUrl) 
+    let authWin = createWindow("url", oauthUrl)
+    authWin.maximize()
     authWin.webContents.on('will-navigate', (navigateEvent, redirectUrl) => {
         const urlParams = new URLSearchParams(new URL(redirectUrl).search);
         const code = urlParams.get('code');
@@ -152,6 +155,7 @@ function discordAuth(){
                 });
                 socket.once("discordToken", (newtoken)=>{
                     token = newtoken
+                    socket.io.opts.query = { token };
                     store.set("discord-token", token)
                 })
                 openApp()

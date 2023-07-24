@@ -1,25 +1,21 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { Link } from "react-router-dom";
 import "./style.css"
-import { solid } from "@fortawesome/fontawesome-svg-core/import.macro"
 
-export default function HeaderButton({displayPage, icon, text, color, href, page}){
-    let isSelected = page == href ? " selected" : ""
-    
+export default function HeaderButton({ icon, text, color, to }) {
+  let isSelected = window.location.pathname === to ? " selected" : "";
+
     return (
-        <a 
+        <Link
+            to={to}
             style={{
                 "--color": color 
             }}
-
             className={'header-button' + isSelected}
-
-            onClick={(e) => {
-                displayPage(href)
-            }}
         >
             <div>
                 <FontAwesomeIcon icon={icon}/> <span>{text}</span>
             </div>
-        </a>
-    )
+        </Link>
+    );
 }

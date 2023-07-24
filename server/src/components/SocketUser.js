@@ -62,15 +62,13 @@ export default class SocketUser extends User{
     getServerList = () => new Promise((resolve, reject) => {
         const serverPathNames = fs.readdirSync(serverDir)
 
-        const servers = serverPathNames.map((serverPathName) =>
-            MinecraftServer.readFromPathName(serverPathName).vignette()
-        )
-
-        resolve({
-            public: servers.filter((server)=> server.visibility == "public"),
-            mine: servers.filter((server)=> server.owner?.id == this.id),
-            sharedWithMe: []//servers.filter((server)=> server.visibility == "public")
-        })
+        const servers = serverPathNames.map((serverPathName) => MinecraftServer.readFromPathName(serverPathName))
+        const filterdServers = {
+            public: servers.filter(server => server.config.permissions.all.view).map(server => server.vignette()),
+            mine: servers.filter(server => server.config.owner == this.id).map(server => server.vignette()),
+            sharedWithMe: servers.filter(server => this.getPermission("view", server)).map(server => server.vignette())
+        }
+        resolve(filterdServers)
     })
 
     /**
@@ -89,7 +87,26 @@ export default class SocketUser extends User{
         return server.setIcon(iconData)
     }
 
-    hasPermission(pathName, permission){
+    /**
+     * @param {string} permission 
+     * @param {MinecraftServer | string} server 
+     * @returns 
+     */
+    getPermission(permission, server){
+        if(typeof server == "string") server = MinecraftServer.readFromPathName(server)
+        return server?.config.permissions[this.id]?.[permission]
+    }
+
+    /**
+     * @param {MinecraftServer | string} server 
+     * @returns 
+     */
+    getServerPermissions(server){
+        if(typeof server == "string") server = MinecraftServer.readFromPathName(server)
+        return server?.config.permissions
+    }
+
+    createServer(name, ){
 
     }
 }

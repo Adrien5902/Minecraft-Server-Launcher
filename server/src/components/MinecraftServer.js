@@ -1,38 +1,72 @@
+//@ts-check
+
 import {serverDir} from "./../../config.js"
 import fs from "fs"
 import path from "path"
 import User from "./User.js"
 import { errors } from "../errors.js"
 import sharp from "sharp"
+import Permission from "./Permission.js";
+import mapObject from "../init.js"
 
 export default class MinecraftServer{
     /**
      * @param {string | Number} pathName 
-     * @param {} config 
+     * @param {{
+     *      name : string
+     *      owner : string | null
+     *      permissions : {
+     *          all : {[permission : string] : any},
+     *          [UserID : string] : {[permission : string] : any}
+     *      }
+     * }} config 
      */
     constructor(pathName, config){
         this.pathName = String(pathName)
-        this.path = path.join(serverDir, pathName)
+        this.path = path.join(serverDir, this.pathName)
         this.config = config
     }
 
-    static create(name, minecraft_version, id){
-        const serverPath = path.join(serverDir, pathName)
+    /** @type {{[key: string] : Permission}} */
+    static permissions = {
+        view: new Permission("Voir le serveur", false),
+        start_server: new Permission("Allumer le serveur", false),
+        stop_server: new Permission("Éteindre le serveur", false),
+        edit_properties: new Permission("Modifier les propriétés du serveur", false),
+        edit_display: new Permission("Modifier le serveur (nom, icône...)", false),
+        edit_permissions: new Permission("Modifier les permissions", false),
+    }
+
+    static defaultPermissions = mapObject(this.permissions, (perm) => perm.value)
+
+    /**
+     * @param {string} name 
+     * @param {string | number} pathName 
+     * @param {string | null} ownerID 
+     */
+    static create(name, pathName, ownerID){
+        const serverPath = path.join(serverDir, String(pathName))
+        fs.mkdirSync(serverPath)
 
         let config = {
             name,
-            minecraft_version: minecraft_version
+            owner: ownerID,
+            permissions: {
+                all: this.defaultPermissions
+            }
         }
 
-        const server = new this(path, config)
+        fs.writeFileSync(serverPath, JSON.stringify(config))
+
+        const server = new this(pathName, config)
     }
 
     static readFromPathName(pathName){
         const serverPath = path.join(serverDir, String(pathName))
 
-        if(!fs.existsSync(serverPath) | !fs.lstatSync(serverPath).isDirectory()) throw errors.serverDoesNotExist(serverPath)
+        if(!fs.existsSync(serverPath) || !fs.lstatSync(serverPath).isDirectory()) throw errors.serverDoesNotExist(serverPath)
 
-        const config = JSON.parse(fs.readFileSync(path.join(serverPath, "config.json")))
+        const config = JSON.parse(fs.readFileSync(path.join(serverPath, "config.json")).toString())
         
         const server = new this(pathName, config)
 
@@ -48,7 +82,6 @@ export default class MinecraftServer{
         return {
             pathName: this.pathName,
             serverName: this.config.name,
-            visibility: this.config.visibility,
             owner: this.getOwner(),
             icon: fs.existsSync(iconPath) ? 'data:image/jpeg;base64,'+fs.readFileSync(iconPath).toString('base64') : "assets/server-icon.png"
         }
@@ -62,6 +95,10 @@ export default class MinecraftServer{
     }
 
     start(){
+
+    }
+
+    setUserPermissions(){
 
     }
 }

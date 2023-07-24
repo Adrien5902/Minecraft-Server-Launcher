@@ -17,3 +17,15 @@ export const latestMinecraftVersion = minecraftVersions[0]
 export const minecraftModLoaders = await curseforgeClient.getMinecraftModLoaders()
 export const recommendedLatestMinecraftModLoader = minecraftModLoaders.find(loader => loader.recommended && loader.gameVersion == latestMinecraftVersion.versionString)
 export const latestMinecraftModLoader = minecraftModLoaders.find(loader => loader.latest && loader.gameVersion == latestMinecraftVersion.versionString)
+
+/**
+ * @param {{}} obj 
+ * @param {(value, key : string, inputObj) => any} callback 
+ * @returns {{}}
+ */
+export default function mapObject(obj, callback) {
+    return Object.keys(obj).reduce((result, key) => {
+        result[key] = callback(obj[key], key, obj);
+        return result;
+    }, {});
+}

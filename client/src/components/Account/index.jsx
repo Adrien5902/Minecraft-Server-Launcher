@@ -1,7 +1,7 @@
 import User from "../User"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { brands, solid } from '@fortawesome/fontawesome-svg-core/import.macro'
-import Button from "../Button"
+import Button from "../Input/Button"
 import Input from "../Input"
 const { ipcRenderer } = window.require("electron")
 import './style.css'
@@ -16,7 +16,7 @@ export default function Account({userData, developperMode, setDevelopperMode, se
             alignItems: "center",
             flexDirection: "column",
         }}>
-            <User pfpSize="512" userData={userData}></User>
+            {userData ? <User pfpSize="512" userData={userData}></User>:""}
         </div>
         
         {developperMode ? <><FontAwesomeIcon icon={solid("id-card")}/> {"id discord : " + userData.id} <br/></> : ""}

@@ -1,0 +1,55 @@
+.sidebar{
+    position: fixed;
+    left: 0;
+    top: var(--header-height);
+    height: 100%;
+    width: var(--sidebar);
+    background: var(--secondary);
+    font-size: clamp(2rem, 2.3vw, 2.5rem);
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.sidebar-button{
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin: .2em 0;
+    cursor: pointer;
+    
+    &:hover{
+        .sidebar-button-select{
+            width: .25em;
+            height: 100%;
+        }
+    }
+
+    &[select=true]{
+        .sidebar-button-select{
+            background: var(--accent);
+            width: .25em;
+            height: 100%;
+        }
+    }
+}
+
+.sidebar-button-select{
+    position: absolute;
+    height: 0;
+    width: 0;
+    opacity: .8;
+    background: var(--primary);
+    border-bottom-right-radius: 1em;
+    border-top-right-radius: 1em;
+    transition: ease 200ms all;
+}
+
+.sidebar-button-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 .4em;
+    padding-top: .2em;
+    padding-bottom: .12em;
+    border-bottom: var(--primary) solid 4px;
+    width: 100%;
+}
