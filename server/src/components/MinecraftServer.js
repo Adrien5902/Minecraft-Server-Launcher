@@ -83,7 +83,7 @@ export default class MinecraftServer{
             pathName: this.pathName,
             serverName: this.config.name,
             owner: this.getOwner(),
-            icon: fs.existsSync(iconPath) ? 'data:image/jpeg;base64,'+fs.readFileSync(iconPath).toString('base64') : "assets/server-icon.png"
+            icon: fs.existsSync(iconPath) ? 'data:image/jpeg;base64,'+fs.readFileSync(iconPath).toString('base64') : "/assets/server-icon.png"
         }
     }
 

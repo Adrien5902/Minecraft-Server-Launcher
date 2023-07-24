@@ -21,10 +21,7 @@ export default function ServerList({displayPage, setCurrentServerPathName}){
                 icon={icon}
                 owner={owner}
                 key={index}
-                onClick={() => {
-                    displayPage("server")
-                    setCurrentServerPathName(pathName)
-                }}
+                serverPathName={pathName}
             >
             </ServerVignette>)
         )

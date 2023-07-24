@@ -1,5 +1,5 @@
 import Header from "./Header";
-import { useEffect, useState, memo, useMemo } from "react";
+import { useEffect, useState } from "react";
 import { Routes, Route } from 'react-router-dom';
 
 import ServerList from "./ServerList";
@@ -33,16 +33,14 @@ function App() {
         setUserData(ipcRenderer.sendSync("getUserData"))
     }, [])
 
-    // const memoRoutes = useMemo(()=>(
-    // ), [lightTheme, developperMode, userData])
-
     return (
         <div id="app" lighttheme={String(lightTheme)}>
             <Header></Header>
             <Routes>
-                <Route path="/" element={<ServerList></ServerList>}></Route>
-                <Route path="account" element={<Account lightTheme={lightTheme} setTheme={setLightTheme} developperMode={developperMode} setDevelopperMode={setDevelopperMode} userData={userData}></Account>}></Route>
-                <Route path="server" element={<ManageServer developperMode={developperMode} currentUserId={userData?.id}></ManageServer>}></Route>
+                <Route path="/index.html" element={<ServerList></ServerList>}></Route>
+                <Route path="/account" element={<Account lightTheme={lightTheme} setTheme={setLightTheme} developperMode={developperMode} setDevelopperMode={setDevelopperMode} userData={userData}></Account>}></Route>
+                <Route path="/manage-server/*" element={<ManageServer developperMode={developperMode}></ManageServer>} ></Route>
+                <Route path="/server" element={<ManageServer developperMode={developperMode} currentUserId={userData?.id}></ManageServer>}></Route>
             </Routes>
         </div>
     );

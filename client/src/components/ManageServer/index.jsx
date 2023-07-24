@@ -3,27 +3,25 @@ import {request} from "../../socket.js"
 import "./style.css"
 import Sidebar from './Sidebar'
 import Display from "./Display/"
+import { Route, Routes, useSearchParams } from "react-router-dom"
 
-export default function ServerContainer({serverPathName, developperMode, currentUserId}){
-    const [manageMenu, setManageMenu] = useState("display")
+export default function ManageServer({developperMode, currentUserId}){
+    const [searchParams, setSearchParams] = useSearchParams();
+    const serverPathName = searchParams.get("s")
+
     const [permissions, setPermissions] = useState(null)
 
     useEffect(()=>{
         request("getPermissions", setPermissions, serverPathName)
-    })
-
-    const menus = {
-        display: <Display permissions={permissions} serverPathName={serverPathName} developperMode={developperMode} currentUserId={currentUserId} />,
-        perms: <span>DFQSD</span>
-    }
+    }, [])
 
     return (
         <>
-            <Sidebar setManageMenu={setManageMenu} manageMenu={manageMenu}></Sidebar>
-
-            <div id="manage-server">
-                {menus[manageMenu]}
-            </div>
+            <Sidebar serverPathName={serverPathName}></Sidebar>
+            <Routes>
+                <Route path="/" developperMode={developperMode} element={<Display permissions={permissions} serverPathName={serverPathName} developperMode={developperMode} currentUserId={currentUserId} />}></Route>
+                <Route path="/perms" element={<span>Test</span>}></Route>
+            </Routes>
         </>
     )
 }

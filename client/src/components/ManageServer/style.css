@@ -1,6 +1,5 @@
-#content{
-    user-select: text;
-    --sidebar: clamp(15rem, 20vw, 25rem);
+:root{
+    --sidebar: clamp(15rem, 21vw, 25rem);
 }
 
 #manage-server{

@@ -16,7 +16,7 @@
         transition: inherit;
     }
 
-    &:hover, &.selected{
+    &:hover, &[select=true]{
         box-shadow: inset 0 0 30px var(--color);
     
         & > *{

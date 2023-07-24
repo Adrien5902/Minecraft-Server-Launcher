@@ -8,6 +8,8 @@
     padding: .6em;
     border-radius: 12px;
     transition: all 500ms ease;
+    color: var(--text);
+    text-decoration: none;
 
     display: flex;
     justify-content: space-between;

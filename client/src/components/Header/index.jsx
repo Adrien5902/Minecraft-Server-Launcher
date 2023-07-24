@@ -20,21 +20,21 @@ export default function Header(){
                 color="white"
                 icon={solid("list")}
                 text="Liste des serveurs"
-                to="/"
+                to="/index.html"
             ></HeaderButton>
 
             <HeaderButton
                 color="var(--accent)"
                 icon={solid("plus")}
                 text="Créer un serveur"
-                to="create-server"
+                to="/create-server"
             ></HeaderButton>
 
             <HeaderButton
                 color="var(--secondary)"
                 icon={solid("user")}
                 text="Mon compte"
-                to="account"
+                to="/account"
             ></HeaderButton>
         </div>
     </header>

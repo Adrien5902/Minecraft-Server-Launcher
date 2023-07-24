@@ -1,14 +1,14 @@
 import "./style.css"
-import User from '../User'
+import { Link } from "react-router-dom"
 
-export default function ServerVignette({owner, icon, name, onClick}){
+export default function ServerVignette({owner, icon, name, serverPathName}){
     return (
-        <div className="server-vignette" onClick={onClick}>
+        <Link className="server-vignette" to={"/manage-server/?s="+serverPathName}>
             <img src={icon}></img>
             <div className="server-vignette-text">
                 <span>{name}</span>
                 <span className="server-vignette-owner">{owner?.username}</span>
             </div>
-        </div>
+        </Link>
     )
 }

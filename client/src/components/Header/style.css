@@ -10,6 +10,7 @@ header{
     background: var(--primary);
     font-size: var(--header-font-size);
     height: var(--header-height);
+    user-select: none;
 
     > * {
         height: 100%;

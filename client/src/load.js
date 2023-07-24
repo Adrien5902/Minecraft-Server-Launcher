@@ -64,7 +64,8 @@ function createWindow (loadType, pathToLoad, nodeIntegration = false, size = {x:
 
 /** @type {BrowserWindow | undefined} */
 function connectionFailed() {
-    createWindow("file", isDev ? "./public/connection_failed.html" : path.join(__dirname, '../build', 'connection_failed.html'), true, {x: 340, y: 420}, false)
+    let win = createWindow("file", isDev ? "./public/connection_failed.html" : path.join(__dirname, '../build', 'connection_failed.html'), true, {x: 340, y: 420}, false)
+    win.setResizable(false)
     socket.once("connect", () => {
         openApp()
     });

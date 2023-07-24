@@ -66,7 +66,7 @@ export default class SocketUser extends User{
         const filterdServers = {
             public: servers.filter(server => server.config.permissions.all.view).map(server => server.vignette()),
             mine: servers.filter(server => server.config.owner == this.id).map(server => server.vignette()),
-            sharedWithMe: servers.filter(server => this.getPermission("view", server)).map(server => server.vignette())
+            sharedWithMe: servers.filter(server => this.getPermission("view", server) && server.config.owner != this.id).map(server => server.vignette())
         }
         resolve(filterdServers)
     })
