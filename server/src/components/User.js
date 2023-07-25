@@ -3,20 +3,22 @@ import fs from 'fs'
 
 export default class User{
     /**
-     * @param {{
+    * @param {{
     *    username :string
     *    discriminator :string
     *    id :string
     *    global_name :string | null
     *    avatar :string | null | undefined
-     * }} obj
-     */
+    *    locale? :string
+    * }} obj
+    */
     constructor(obj){
         this.username = obj.username; 
         this.discriminator = obj.discriminator; 
         this.id = obj.id; 
         this.global_name = obj.global_name; 
         this.avatar = obj.avatar;
+        this.locale = obj.locale
     }
     
     /** @type {User[]} */
@@ -62,6 +64,8 @@ export default class User{
         this.#users.push(user);
         this.saveUsers();
     }
+
+    static getFromID = (userID) => this.#users.find(user => user.id == userID)
 }
 
 User.loadUsers();

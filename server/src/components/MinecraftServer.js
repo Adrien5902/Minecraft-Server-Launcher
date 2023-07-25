@@ -61,6 +61,10 @@ export default class MinecraftServer{
         const server = new this(pathName, config)
     }
 
+    /**
+     * @param {string} pathName 
+     * @returns {MinecraftServer}
+     */
     static readFromPathName(pathName){
         const serverPath = path.join(serverDir, String(pathName))
 

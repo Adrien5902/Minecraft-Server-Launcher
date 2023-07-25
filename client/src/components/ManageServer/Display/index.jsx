@@ -46,10 +46,10 @@ function Display({currentUserId, developperMode, serverPathName, permissions}) {
         
         {
         serverVignette?.owner ?
-        <div className="owner">
+        <h3 className="owner">
             <span>Par : </span>
             {serverVignette ? <User userData={serverVignette.owner} currentUserId={currentUserId}/> : <Loading/>}
-        </div>
+        </h3>
         : ""
         }
         

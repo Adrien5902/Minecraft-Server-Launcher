@@ -1,12 +1,10 @@
 import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
 import './style.css'
 
 function Switch({
-    defaultValue, 
-    autoUpdate = false, 
-    onChange, 
+    updateValue,
+    value,
     properties = {
         on: {
             icon: solid("check"),
@@ -18,19 +16,10 @@ function Switch({
         }
     }
 }) {
-    const [value, setValue] = useState(defaultValue)
-
-    function handleClick(){
-        onChange(!value)
-        if(autoUpdate){
-            setValue(!value)
-        }
-    }
-
     return ( 
     <div 
-        onClick={handleClick} 
-        value={value} 
+        onClick={()=>updateValue(!value)}
+        value={value}
         style={{justifyContent: value ? "right":"left"}} 
         className="switch"
     >

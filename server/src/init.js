@@ -25,7 +25,8 @@ export const latestMinecraftModLoader = minecraftModLoaders.find(loader => loade
  */
 export default function mapObject(obj, callback) {
     return Object.keys(obj).reduce((result, key) => {
-        result[key] = callback(obj[key], key, obj);
+        const res = callback(obj[key], key, obj)
+        if(res !== undefined) result[key] = res;
         return result;
     }, {});
 }

@@ -29,7 +29,7 @@ export default function ServerList({displayPage, setCurrentServerPathName}){
     
     return (
         <>
-            <h2><FontAwesomeIcon icon={solid("user-shield")}/> Mes serveurs :</h2>
+            <h3><FontAwesomeIcon icon={solid("user-shield")}/> Mes serveurs :</h3>
             <div id="my-servers" className="server-list">
                 {
                 servers?.mine ? 
@@ -40,7 +40,7 @@ export default function ServerList({displayPage, setCurrentServerPathName}){
                 }
             </div>
 
-            <h2><FontAwesomeIcon icon={solid("share-from-square")}/> Partagés avec moi :</h2>
+            <h3><FontAwesomeIcon icon={solid("share-from-square")}/> Partagés avec moi :</h3>
             <div id="sharedWithMe-servers" className="server-list">
                 {
                 servers?.sharedWithMe ? 
@@ -51,7 +51,7 @@ export default function ServerList({displayPage, setCurrentServerPathName}){
                 }
             </div>
 
-            <h2><FontAwesomeIcon icon={solid("earth-americas")}/> Serveurs publics :</h2>
+            <h3><FontAwesomeIcon icon={solid("earth-americas")}/> Serveurs publics :</h3>
             <div id="public-servers" className="server-list">
                 {
                 servers?.public ? 

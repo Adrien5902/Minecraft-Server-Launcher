@@ -6,7 +6,7 @@ export default function Header(){
     return (
     <header>
         <div>
-            <img src="assets/mc-icon.webp" alt="" style={{height: "1.5em", margin: "4px"}}/>
+            <img src="/assets/mc-icon.webp" alt="" style={{height: "1.5em", margin: "4px"}}/>
             <span 
                 style={{
                     fontFamily: "'Ubuntu', sans-serif",

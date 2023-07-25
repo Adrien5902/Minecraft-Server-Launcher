@@ -6,14 +6,6 @@
     margin-left: var(--sidebar);
 }
 
-h1{
-    font-size: 4rem;
-    margin-bottom: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .owner{
     display: flex;
     align-items: center;

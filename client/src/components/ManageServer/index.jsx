@@ -3,6 +3,7 @@ import {request} from "../../socket.js"
 import "./style.css"
 import Sidebar from './Sidebar'
 import Display from "./Display/"
+import ServerPermissions from "./ServerPermissions"
 import { Route, Routes, useSearchParams } from "react-router-dom"
 
 export default function ManageServer({developperMode, currentUserId}){
@@ -18,10 +19,12 @@ export default function ManageServer({developperMode, currentUserId}){
     return (
         <>
             <Sidebar serverPathName={serverPathName}></Sidebar>
-            <Routes>
-                <Route path="/" developperMode={developperMode} element={<Display permissions={permissions} serverPathName={serverPathName} developperMode={developperMode} currentUserId={currentUserId} />}></Route>
-                <Route path="/perms" element={<span>Test</span>}></Route>
-            </Routes>
+            <div id="manage-server">
+                <Routes>
+                    <Route path="/" developperMode={developperMode} element={<Display permissions={permissions} serverPathName={serverPathName} developperMode={developperMode} currentUserId={currentUserId} />}></Route>
+                    <Route path="/perms" element={<ServerPermissions></ServerPermissions>}></Route>
+                </Routes>
+            </div>
         </>
     )
 }

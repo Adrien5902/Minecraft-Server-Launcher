@@ -4,7 +4,7 @@ import {Socket} from "socket.io"
 import {serverDir} from '../../config.js'
 import {ServerLauncherError, errors} from '../errors.js'
 import MinecraftServer from './MinecraftServer.js'
-import { oauth } from '../init.js'
+import mapObject, { oauth } from '../init.js'
 import DiscordOauth2 from "discord-oauth2"
 import User from './User.js'
 
@@ -50,10 +50,10 @@ export default class SocketUser extends User{
             if(!userDB){
                 User.pushUser(new User(discordInfo))
             }else{
-                Object.assign(userDB, discordInfo)
+                Object.assign(userDB, new User(discordInfo))
             }
             
-            socket.emit("log-in", true, discordInfo)
+            socket.emit("log-in", true, new User(discordInfo))
             resolve(user)
         })
         .catch(err => socket.emit("log-in", false))
@@ -99,11 +99,18 @@ export default class SocketUser extends User{
 
     /**
      * @param {MinecraftServer | string} server 
-     * @returns 
      */
     getServerPermissions(server){
         if(typeof server == "string") server = MinecraftServer.readFromPathName(server)
-        return server?.config.permissions
+        return {
+            //@ts-ignore
+            defaultPermissions: server.constructor.permissions,
+            permissions: server.config.permissions,
+            users: Object.values(mapObject(server.config.permissions, (perms, userID)=>{
+                if(userID == "all") return
+                return User.getFromID(userID)
+            })),
+        }
     }
 
     createServer(name, ){

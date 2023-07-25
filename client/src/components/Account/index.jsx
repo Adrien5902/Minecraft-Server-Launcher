@@ -33,9 +33,8 @@ export default function Account({userData, developperMode, setDevelopperMode, se
         <div id="settings">
             <Input 
                 label="Thème"
-                type="switch"
                 onChange={setTheme}
-                defaultValue={lightTheme}
+                value={lightTheme}
                 autoUpdate={true}
                 properties={{
                     on:{
@@ -49,9 +48,8 @@ export default function Account({userData, developperMode, setDevelopperMode, se
             />
             <Input
                 label="Mode développeur"
-                type="switch"
                 onChange={setDevelopperMode}
-                defaultValue={developperMode}
+                value={developperMode}
                 autoUpdate={true}
             />
         </div>

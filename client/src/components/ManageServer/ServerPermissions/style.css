@@ -1,0 +1,22 @@
+#manage-server{
+    display: flex;
+    justify-content: center;
+    padding: 0 2em;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1, h2, .permissions-list{
+    display: flex;
+    align-items: center;
+}
+
+.permissions-list{
+    flex-direction: column;
+    
+    > * {
+        display: flex;
+        justify-content: space-between;
+        width: clamp(20em, 100%, 35em);
+    }
+}
