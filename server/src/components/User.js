@@ -73,7 +73,7 @@ export default class User{
      * @param {MinecraftServer | string} server 
      */
     getUserServerPermissions(server){
-        if(typeof server == "string") server = MinecraftServer.readFromPathName(server)
+        server = MinecraftServer.readFromPathName(server)
         if(server.config.owner == this.id){
             return mapObject(MinecraftServer.defaultPermissions, () => true)
         }else{
@@ -88,7 +88,7 @@ export default class User{
      * @param {*} permission
      */
     getUserServerPermission(server, permission){
-        if(typeof server == "string") server = MinecraftServer.readFromPathName(server)
+        server = MinecraftServer.readFromPathName(server)
         if(server.config.owner == this.id){
             return true
         }else{

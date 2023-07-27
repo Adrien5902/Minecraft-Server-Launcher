@@ -23,6 +23,12 @@
 
 .permissions-title{
     cursor: pointer;
+
+    &:hover:not(:has(.permissions-remove-user:hover)){
+        & .fold-chevron{
+            filter: drop-shadow(0 0 4px var(--text));
+        }
+    }
 }
 
 .permissions-list{

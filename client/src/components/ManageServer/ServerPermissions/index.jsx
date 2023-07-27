@@ -21,7 +21,7 @@ const permissionsLocale = {
     console: (<span><FontAwesomeIcon icon={solid("terminal")}/> Accès à la console</span>),
 }
 
-function ServerPermissions() {
+function ServerPermissions({resetPermissions, currentPermissions}) {
     const [searchParams, setSearchParams] = useSearchParams();
     const serverPathName = searchParams.get("s")
     const [changed, setChanged] = useState(false)
@@ -61,15 +61,22 @@ function ServerPermissions() {
 
     function savePermissions(){
         request("setServerPermissions", requestPerms, serverPathName, permissions.permissions)
-    }
+        resetPermissions()
+}
 
     function addUser(userData){
+        if(permissions.permissions[userData.id]) return
         let prevPermissions = permissions
         prevPermissions.users.push(userData)
         prevPermissions.permissions[userData.id] = {}
         setPermissions(prevPermissions)
+        updatePermissions(prevPermissions.permissions)
         setChanged(true)
     }
+
+    if(!currentPermissions) return <Loading/>
+
+    if(!currentPermissions.edit_permissions) history.go(-1)
 
     return ( 
         <>
@@ -165,10 +172,11 @@ function ServerPermissions() {
             />
         </div>
 
-        {changed ? <ConfirmSave
+        <ConfirmSave
             onConfirm={savePermissions}
             onCancel={requestPerms}
-        /> : ""}
+            displayed={changed}
+        />
         </>
     );
 }

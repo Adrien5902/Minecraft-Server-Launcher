@@ -63,45 +63,44 @@ export default class SocketUser extends User{
         const serverPathNames = fs.readdirSync(serverDir)
 
         const servers = serverPathNames.map((serverPathName) => MinecraftServer.readFromPathName(serverPathName))
+        const serverVignette = server => server.vignette()
         const filterdServers = {
-            public: servers.filter(server => server.config.permissions.all.view).map(server => server.vignette()),
-            mine: servers.filter(server => server.config.owner == this.id).map(server => server.vignette()),
-            sharedWithMe: servers.filter(server => this.getPermission("view", server) && server.config.owner != this.id).map(server => server.vignette())
+            public: servers.filter(server => server.config.permissions.all.view && server.config.permissions?.[this.id]?.view !== false).map(serverVignette),
+            mine: servers.filter(server => server.config.owner == this.id).map(serverVignette),
+            sharedWithMe: servers.filter(server => server.config.permissions?.[this.id]?.view && server.config.owner != this.id).map(serverVignette)
         }
         resolve(filterdServers)
     })
 
     /**
-     * @param {string} pathName 
+     * @param {string | MinecraftServer} server 
      */
-    getServerVignette(pathName){
-        return MinecraftServer.readFromPathName(pathName).vignette()
+    getServerVignette(server){
+        server = MinecraftServer.readFromPathName(server)
+        return server.vignette()
     }
 
     currentOnServer(){
         return null
     }
     
-    changeServerIcon(serverPathName, iconData){
-        let server = MinecraftServer.readFromPathName(serverPathName)
-        return server.setIcon(iconData)
-    }
-
     /**
-     * @param {string} permission 
      * @param {MinecraftServer | string} server 
+     * @param {*} iconData 
      * @returns 
      */
-    getPermission(permission, server){
-        if(typeof server == "string") server = MinecraftServer.readFromPathName(server)
-        return server?.config.permissions[this.id]?.[permission]
+    changeServerIcon(server, iconData){
+        server = MinecraftServer.readFromPathName(server)
+
+        this.checkForPermission(server, "edit_permissions")
+        return server.setIcon(iconData)
     }
 
     /**
      * @param {MinecraftServer | string} server 
      */
     getServerPermissions(server){
-        if(typeof server == "string") server = MinecraftServer.readFromPathName(server)
+        server = MinecraftServer.readFromPathName(server)
         return {
             //@ts-ignore
             defaultPermissions: server.constructor.permissions,
@@ -118,14 +117,24 @@ export default class SocketUser extends User{
      * @param {*} permissions 
      */
     setServerPermissions(server, permissions){
-        //check if user has permission first
-        if(typeof server == "string") server = MinecraftServer.readFromPathName(server)
+        server = MinecraftServer.readFromPathName(server)
+        this.checkForPermission(server, "edit_permissions")
+
         //@ts-ignore
         permissions.all.view ??= MinecraftServer.defaultPermissions.view
         delete permissions[server.config.owner ?? ""]
         server.config.permissions = permissions
         server.saveConfig()
         return null
+    }
+    
+    /**
+     * @param {string} permissionKey
+     * @param {string | MinecraftServer} server
+     */
+    checkForPermission(server, permissionKey){
+        if (!this.getUserServerPermission(server, permissionKey))
+        throw errors.permission(permissionKey)
     }
 
     /**

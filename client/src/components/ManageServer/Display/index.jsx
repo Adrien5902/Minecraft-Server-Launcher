@@ -7,7 +7,7 @@ import EditableImage from "../../Input/EditableImage"
 import { useEffect, useState } from "react"
 import { request } from "../../../socket"
 
-function Display({currentUserId, developperMode, serverPathName, permissions}) {
+function Display({currentUserId, developperMode, serverPathName, currentPermissions}) {
     const [currentOnServer, setCurrentOnServer] = useState(undefined)
     const [serverVignette, setServerVignette] = useState(null)
 
@@ -22,35 +22,29 @@ function Display({currentUserId, developperMode, serverPathName, permissions}) {
         request("getServerVignette", setServerVignette, serverPathName)
     }, [])
 
+    if(!serverVignette) return <Loading/>
+
     return ( 
         <>
         <h1>
-        {
-            serverVignette ? 
-            <>
-                <EditableImage
-                    editable={permissions?.edit_display ?? false}
-                    src={serverVignette.icon}
-                    autoUpdate={false}
-                    onChange={changeServerIcon}
-                    supportedFormats={['png']}
-                />
-                <span>{serverVignette.serverName}</span>
-            </> 
-
-            : <Loading/>
-        }
+            <EditableImage
+                editable={currentPermissions?.edit_display ?? false}
+                src={serverVignette.icon || "/assets/server-icon.png"}
+                autoUpdate={false}
+                onChange={changeServerIcon}
+                supportedFormats={['png']}
+            />
+            <span>{serverVignette.serverName}</span>
         </h1>
         
         {developperMode ? <h3><FontAwesomeIcon icon={solid("id-card")}/> Id du serveur : {serverVignette?.pathName}</h3> : ""}
         
         {
-        serverVignette?.owner ?
+        serverVignette?.owner &&
         <h3 className="owner">
             <span>Par : </span>
-            {serverVignette ? <User userData={serverVignette.owner} currentUserId={currentUserId}/> : <Loading/>}
+            <User userData={serverVignette.owner} currentUserId={currentUserId}/>
         </h3>
-        : ""
         }
         
         {

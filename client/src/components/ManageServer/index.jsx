@@ -12,8 +12,12 @@ export default function ManageServer({developperMode, currentUserId}){
 
     const [currentPermissions, setCurrentPermissions] = useState(null)
 
-    useEffect(()=>{
+    function resetPermissions(){
         request("getUserServerPermissions", setCurrentPermissions, serverPathName)
+    }
+
+    useEffect(()=>{
+        resetPermissions()
     }, [])
 
     return (
@@ -33,7 +37,10 @@ export default function ManageServer({developperMode, currentUserId}){
                     ></Route>
                     <Route
                         path="/perms"
-                        element={<ServerPermissions></ServerPermissions>}>
+                        element={<ServerPermissions
+                            currentPermissions={currentPermissions}
+                            resetPermissions={resetPermissions}
+                        ></ServerPermissions>}>
                     </Route>
                 </Routes>
             </div>

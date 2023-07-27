@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { request } from "../../socket"
+import { formatSearch, request } from "../../socket"
 import ServerVignette from '../SeverVignette'
 import Loading from "./../Loading"
 import './style.css'
@@ -26,9 +26,21 @@ export default function ServerList({displayPage, setCurrentServerPathName}){
             </ServerVignette>)
         )
     }
+
+    function searchServer(input){
+        const formatedSearch = formatSearch(input)
+        document.querySelectorAll(".server-vignette").forEach(server => {
+            server.style.display = formatSearch(server.innerText).includes(formatedSearch) ? "" : "none"
+        })
+    }
     
     return (
         <>
+            <div id="search-server">
+                <FontAwesomeIcon icon={solid("magnifying-glass")}/>
+                <input type="text" placeholder="Rechercher un serveur..." onChange={(e)=>searchServer(e.target.value)}/>
+            </div>
+
             <h3><FontAwesomeIcon icon={solid("user-shield")}/> Mes serveurs :</h3>
             <div id="my-servers" className="server-list">
                 {

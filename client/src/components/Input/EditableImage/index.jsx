@@ -44,7 +44,7 @@ function EditableImage({editable = true, src, autoUpdate = false, onChange, supp
 
     return ( 
     <div className="editable-image centered-flex" onClick={handleClick} editable={String(editable)}>
-        <div className="editable-image-container">
+        <div className="editable-image-container centered-flex">
             {reloading ? 
                 <FontAwesomeIcon icon={solid("rotate-right")} className="editable-image-reload"/>
                 : 

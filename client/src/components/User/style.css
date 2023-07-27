@@ -14,6 +14,9 @@
     border-radius: 100%;
     margin-right: 12px;
     height: 2.5em;
+    aspect-ratio: 1;
+    width: 100%;
+    max-width: 2.5em;
 }
 
 .user-text-wrapper{

@@ -11,3 +11,20 @@ h3{
     margin-top: 2em;
     margin-bottom: 0;
 }
+
+#search-server{
+    display: inline-flex;
+    align-items: center;
+    padding: .5em;
+    margin-top: 2em;
+    border-radius: 1em;
+    width: clamp(15rem, 80%, 30rem);
+
+    background: var(--primary);
+
+    > input {
+        width: 100%;
+        border: 0;
+        border-radius: 0;
+    }
+}

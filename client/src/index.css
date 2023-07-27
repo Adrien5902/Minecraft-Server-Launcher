@@ -102,4 +102,10 @@ input{
     background: var(--primary);
     color: var(--text);
     transition: all 200ms ease;
+    font-family: inherit;
+}
+
+::placeholder{
+    color: var(--text);
+    opacity: .5;
 }

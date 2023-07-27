@@ -17,3 +17,11 @@ export function listen(event, cb){
         if(typeof cb == "function") cb(...data)
     })
 }
+
+/**
+ * @param {string} text 
+ * @returns {string}
+ */
+export function formatSearch(text){
+    return text.toLowerCase().replaceAll(" ", "").normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+}

@@ -66,10 +66,12 @@ export default class MinecraftServer{
     }
 
     /**
-     * @param {string} pathName 
+     * @param {string | MinecraftServer} pathName 
      * @returns {MinecraftServer}
      */
     static readFromPathName(pathName){
+        if(pathName instanceof MinecraftServer) return pathName
+
         const serverPath = path.join(serverDir, String(pathName))
 
         if(!fs.existsSync(serverPath) || !fs.lstatSync(serverPath).isDirectory()) throw errors.serverDoesNotExist(serverPath)
@@ -91,7 +93,7 @@ export default class MinecraftServer{
             pathName: this.pathName,
             serverName: this.config.name,
             owner: this.getOwner(),
-            icon: fs.existsSync(iconPath) ? 'data:image/jpeg;base64,'+fs.readFileSync(iconPath).toString('base64') : "/assets/server-icon.png"
+            icon: fs.existsSync(iconPath) && 'data:image/jpeg;base64,'+fs.readFileSync(iconPath).toString('base64')
         }
     }
 
