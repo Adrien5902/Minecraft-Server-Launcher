@@ -1,5 +1,7 @@
 //@ts-check
 import fs from 'fs'
+import MinecraftServer from './MinecraftServer.js';
+import mapObject from '../init.js';
 
 export default class User{
     /**
@@ -66,6 +68,35 @@ export default class User{
     }
 
     static getFromID = (userID) => this.#users.find(user => user.id == userID)
+
+    /**
+     * @param {MinecraftServer | string} server 
+     */
+    getUserServerPermissions(server){
+        if(typeof server == "string") server = MinecraftServer.readFromPathName(server)
+        if(server.config.owner == this.id){
+            return mapObject(MinecraftServer.defaultPermissions, () => true)
+        }else{
+            return server.config.permissions[this.id]
+            ?? server.config.permissions.all
+            ?? MinecraftServer.defaultPermissions
+        }
+    }
+
+    /**
+     * @param {MinecraftServer | string} server
+     * @param {*} permission
+     */
+    getUserServerPermission(server, permission){
+        if(typeof server == "string") server = MinecraftServer.readFromPathName(server)
+        if(server.config.owner == this.id){
+            return true
+        }else{
+            return server.config.permissions[this.id]?.[permission]
+            ?? server.config.permissions.all?.[permission]
+            ?? MinecraftServer.defaultPermissions[permission]
+        }
+    }
 }
 
 User.loadUsers();

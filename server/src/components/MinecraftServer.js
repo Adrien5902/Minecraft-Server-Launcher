@@ -32,7 +32,7 @@ export default class MinecraftServer{
         view: new Permission("Voir le serveur", false),
         start_server: new Permission("Allumer le serveur", false),
         stop_server: new Permission("Stopper le serveur", false),
-        console: new Permission("Accès à la console", false),
+        console: new Permission("Accès à la console", 0, "slider"),
         edit_display: new Permission("Modifier le serveur (nom, icône...)", false),
         edit_properties: new Permission("Modifier les propriétés du serveur", false),
         edit_permissions: new Permission("Modifier les permissions", false),
