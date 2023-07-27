@@ -24,7 +24,7 @@ function Display({currentUserId, developperMode, serverPathName, permissions}) {
 
     return ( 
         <>
-        <h1 className="centered-flex">
+        <h1>
         {
             serverVignette ? 
             <>

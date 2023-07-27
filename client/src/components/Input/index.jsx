@@ -25,7 +25,7 @@ function Input({type, label, value: defaultValue, autoUpdate = false, onChange =
     }
 
     return <div className="input" type={type}>
-        <label>{label}</label>
+        {label ? <label>{label}</label> : ""}
         {getInput()}
     </div>
 }

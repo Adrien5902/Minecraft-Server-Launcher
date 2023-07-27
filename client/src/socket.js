@@ -7,6 +7,10 @@ export function request(event, cb, ...args){
     ipcRenderer.send("request", event, ...args)
 }
 
+export function emit(event, ...args){
+    ipcRenderer.send("emit", event, ...args)
+}
+
 export function listen(event, cb){
     ipcRenderer.send("listen", event)
     ipcRenderer.on(event, (...data) => {

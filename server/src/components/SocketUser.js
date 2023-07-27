@@ -4,7 +4,7 @@ import {Socket} from "socket.io"
 import {serverDir} from '../../config.js'
 import {ServerLauncherError, errors} from '../errors.js'
 import MinecraftServer from './MinecraftServer.js'
-import mapObject, { oauth } from '../init.js'
+import mapObject, { formatSearch, oauth } from '../init.js'
 import DiscordOauth2 from "discord-oauth2"
 import User from './User.js'
 
@@ -111,6 +111,35 @@ export default class SocketUser extends User{
                 return User.getFromID(userID)
             })),
         }
+    }
+
+    /**
+     * @param {MinecraftServer | string} server 
+     * @param {*} permissions 
+     */
+    setServerPermissions(server, permissions){
+        //check if user has permission first
+        if(typeof server == "string") server = MinecraftServer.readFromPathName(server)
+        //@ts-ignore
+        permissions.all.view ??= MinecraftServer.defaultPermissions.view
+        delete permissions[server.config.owner ?? ""]
+        server.config.permissions = permissions
+        server.saveConfig()
+        return null
+    }
+
+    /**
+     * @param {string} input 
+     */
+    searchUsers(input = ""){
+        const formatedInput = formatSearch(String(input))
+        if (!formatedInput) return []
+        return User.users.filter(
+            ({username, global_name}) => 
+            formatSearch(username).includes(formatedInput)
+            ||
+            global_name ? formatSearch(global_name ?? "").includes(formatedInput) : null
+        ).slice(0, 4)
     }
 
     createServer(name, ){

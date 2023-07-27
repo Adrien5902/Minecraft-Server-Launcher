@@ -1,7 +1,7 @@
 export default class TypeEditatble{
-    constructor(name, defaultValue){
+    constructor(name, defaultValue, type = null){
         this.name = name
         this.value = defaultValue
-        this.type = typeof this.value
+        this.type = type ?? typeof this.value
     }
 }

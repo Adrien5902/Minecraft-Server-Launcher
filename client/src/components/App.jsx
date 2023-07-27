@@ -36,12 +36,14 @@ function App() {
     return (
         <div id="app" lighttheme={String(lightTheme)}>
             <Header></Header>
-            <Routes>
-                <Route path="/index.html" element={<ServerList></ServerList>}></Route>
-                <Route path="/account" element={<Account lightTheme={lightTheme} setTheme={setLightTheme} developperMode={developperMode} setDevelopperMode={setDevelopperMode} userData={userData}></Account>}></Route>
-                <Route path="/manage-server/*" element={<ManageServer developperMode={developperMode}></ManageServer>} ></Route>
-                <Route path="/server" element={<ManageServer developperMode={developperMode} currentUserId={userData?.id}></ManageServer>}></Route>
-            </Routes>
+            <div id="content">
+                <Routes>
+                    <Route path="/index.html" element={<ServerList></ServerList>}></Route>
+                    <Route path="/account" element={<Account lightTheme={lightTheme} setTheme={setLightTheme} developperMode={developperMode} setDevelopperMode={setDevelopperMode} userData={userData}></Account>}></Route>
+                    <Route path="/manage-server/*" element={<ManageServer developperMode={developperMode}></ManageServer>} ></Route>
+                    <Route path="/server" element={<ManageServer developperMode={developperMode} currentUserId={userData?.id}></ManageServer>}></Route>
+                </Routes>
+            </div>
         </div>
     );
 }

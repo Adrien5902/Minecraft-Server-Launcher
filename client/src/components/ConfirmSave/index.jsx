@@ -4,7 +4,7 @@ import './style.css'
 
 function ConfirmSave({onConfirm, onCancel}) {
     const handleACLick = (e) => {
-        e.preventDefault()
+        if (document.querySelector(".confirm-save")) e.preventDefault()
         
         document.querySelectorAll(".confirm-save").forEach(confirmSave => {
             confirmSave.animate([
@@ -34,23 +34,24 @@ function ConfirmSave({onConfirm, onCancel}) {
     return ( 
         <div className="confirm-save">
             <span>Sauvergarder les modifications ?</span>
-            <div>
+            <div className='confirm-save-buttons'>
                 <Button
                     fancy={false}
                     text="Annuler"
                     color='var(--background)'
                     onClick={()=>{
-                        onCancel()
                         remove()
+                        onCancel()
                     }}
                 />
                 <Button
                     color='lime'
                     fancy={false}
                     text="Sauvegarder"
+                    textColor='white'
                     onClick={()=>{
-                        onConfirm()
                         remove()
+                        onConfirm()
                     }}
                 />
             </div>

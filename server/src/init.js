@@ -30,3 +30,10 @@ export default function mapObject(obj, callback) {
         return result;
     }, {});
 }
+
+/**
+ * @param {string} text 
+ */
+export function formatSearch(text){
+    return text.toLowerCase().replaceAll(" ", "").normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+}

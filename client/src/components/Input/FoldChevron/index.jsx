@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import './style.css'
 
-function FoldChevron({folded: defaultFolded = false, selector}) {
+const FoldChevron = ({id, folded: defaultFolded = false, selector}) => {
     const [folded, setFolded] = useState(defaultFolded)
 
     useEffect(()=>{
@@ -19,7 +19,7 @@ function FoldChevron({folded: defaultFolded = false, selector}) {
     }
 
     return ( 
-        <div className="fold-chevron" onClick={handleClick} folded={String(folded)}>
+        <div id={id} className="fold-chevron" onClick={handleClick} folded={String(folded)}>
             <FontAwesomeIcon icon={solid("chevron-down")}/>
         </div>
     );

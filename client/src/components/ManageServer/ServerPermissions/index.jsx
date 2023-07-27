@@ -9,6 +9,17 @@ import './style.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import FoldChevron from "../../Input/FoldChevron";
+import AddSomeone from "./AddSomeone";
+
+const permissionsLocale = {
+    view: (<span><FontAwesomeIcon icon={solid("eye")}/> Voir le serveur</span>),
+    start_server: (<span><FontAwesomeIcon icon={solid("circle-play")}/> Allumer le serveur</span>),
+    stop_server: (<span><FontAwesomeIcon icon={solid("power-off")}/> Éteindre le serveur</span>),
+    edit_display: (<span><FontAwesomeIcon icon={solid("pen")}/> Modifier le serveur (nom, icône...)</span>),
+    edit_properties: (<span><FontAwesomeIcon icon={solid("gears")}/> Modifier les propriétés du serveur</span>),
+    edit_permissions: (<span><FontAwesomeIcon icon={solid("user-shield")}/> Modifier les permissions</span>),
+    console: (<span><FontAwesomeIcon icon={solid("terminal")}/> Accès à la console</span>),
+}
 
 function ServerPermissions() {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -48,77 +59,116 @@ function ServerPermissions() {
         requestPerms()
     }, [searchParams])
 
+    function savePermissions(){
+        request("setServerPermissions", requestPerms, serverPathName, permissions.permissions)
+    }
+
+    function addUser(userData){
+        let prevPermissions = permissions
+        prevPermissions.users.push(userData)
+        prevPermissions.permissions[userData.id] = {}
+        setPermissions(prevPermissions)
+        setChanged(true)
+    }
+
     return ( 
         <>
-        <h1><FontAwesomeIcon icon={solid("shield-halved")}/>Permissions :</h1>
-        {
-        permissions ? 
-        
-        Object.keys(permissions.permissions).map(userID => {
-            const userPermissions = Object.values(mapObject(permissions.defaultPermissions, (permission, key)=>{
-                permissions.permissions[userID][key] = permissions.permissions[userID][key] ?? permission.value
-                return {
-                    name: permission.name,
-                    type: permission.type,
-                    key,
-                    value: permissions.permissions[userID][key],
-                }
-            }))
-
-            function getAllValue(){
-                const perms = permissions.permissions[userID]
-                return Object.values(perms).every(v => v === true)
-            }
-            let allValue = getAllValue()
-
-            function setAll(value){
-                let perms = permissions.permissions
-                for(const {key} of userPermissions){
-                    perms[userID][key] = value
-                }
-                updatePermissions(perms)
-                getAllValue()
-            }
-
-            return <div>
-                <h2>
-                    <FoldChevron selector={`.permissions-list[userid="${userID}"]`}/>
-                    {
-                    userID == "all" ? 
-                    <span>Tout le monde</span>
-                    :<User userData={permissions.users.find(user => user.id = userID)}/>
+        <div id="permissions-content-container">
+            <h1><span><FontAwesomeIcon icon={solid("shield-halved")}/> Permissions :</span></h1>
+            {
+            permissions ? 
+            
+            Object.keys(permissions.permissions).map(userID => {
+                const userPermissions = Object.values(mapObject(
+                    permissions.defaultPermissions, (permission, key)=>{
+                        permissions.permissions[userID][key] ??= permission.value
+                        return {
+                            name: permissionsLocale[key] ?? permission.name,
+                            type: permission.type,
+                            key,
+                            value: permissions.permissions[userID][key],
+                        }
                     }
-                </h2>
-                <div className="permissions-list" userid={String(userID)}>
-                    <Input
-                        type="boolean"
-                        label="Tout"
-                        autoUpdate={true}
-                        value={allValue}
-                        onChange={setAll}
-                    />
-                    {
-                    userPermissions.map((permission, index) => {
-                        userPermissions.push(permission)
-                        return <Input
-                            key={index}
-                            label={permission.name}
-                            value={permission.value}
-                            type={permission.type}
+                ))
+
+                function getAllValue(){
+                    const perms = permissions.permissions[userID]
+                    return Object.values(perms).every(v => v === true)
+                }
+                let allValue = getAllValue()
+
+                function setAll(value){
+                    let perms = permissions.permissions
+                    for(const {key} of userPermissions){
+                        perms[userID][key] = value
+                    }
+                    updatePermissions(perms)
+                    getAllValue()
+                }
+
+                function removeUser(){
+                    let prevPerms = permissions.permissions
+                    delete prevPerms[userID]
+                    updatePermissions(prevPerms)
+                }
+
+                return <div className="permissions">
+                    <h2 className="permissions-title" onClick={(e)=>{
+                        e.target.closest(".permissions-title").querySelector(".fold-chevron").click()
+                    }}>
+                        <FoldChevron selector={`.permissions-list[userid="${userID}"]`}/>
+                        {
+                        userID == "all" ? 
+                        <><span>Tout le monde</span><FontAwesomeIcon icon={solid("globe-americas")}/></>
+                        :
+                        <>
+                            <User userData={permissions.users.find(user => user.id = userID)}/>
+                            <FontAwesomeIcon
+                                icon={solid("xmark")}
+                                onClick={removeUser}
+                                className="permissions-remove-user"
+                            />
+                        </>
+                        }
+                    </h2>
+                    <div className="permissions-list" userid={String(userID)}>
+                        <Input
+                            type="boolean"
+                            label={<span><FontAwesomeIcon icon={solid("layer-group")}/> Toutes les permissions</span>}
                             autoUpdate={true}
-                            onChange={v => handleChange(userID, permission.key, v)}
+                            value={allValue}
+                            onChange={setAll}
                         />
-                    })
-                    }
+                        {
+                        userPermissions.map((permission, index) => {
+                            userPermissions.push(permission)
+                            return <Input
+                                key={index}
+                                label={permission.name}
+                                value={permission.value}
+                                type={permission.type}
+                                autoUpdate={true}
+                                onChange={v => handleChange(userID, permission.key, v)}
+                            />
+                        })
+                        }
+                    </div>
                 </div>
-            </div>
-        })
-        
-        : <Loading/>
+            })
+            
+            : <Loading/>
 
-        }
+            }
 
-        {changed ? <ConfirmSave onConfirm={()=>{}} onCancel={requestPerms}/> : ""}
+            <AddSomeone
+                addUser={addUser}
+            />
+        </div>
+
+        {changed ? <ConfirmSave
+            onConfirm={savePermissions}
+            onCancel={requestPerms}
+        /> : ""}
         </>
     );
 }

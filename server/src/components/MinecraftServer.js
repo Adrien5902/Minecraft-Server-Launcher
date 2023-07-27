@@ -31,9 +31,10 @@ export default class MinecraftServer{
     static permissions = {
         view: new Permission("Voir le serveur", false),
         start_server: new Permission("Allumer le serveur", false),
-        stop_server: new Permission("Éteindre le serveur", false),
-        edit_properties: new Permission("Modifier les propriétés du serveur", false),
+        stop_server: new Permission("Stopper le serveur", false),
+        console: new Permission("Accès à la console", false),
         edit_display: new Permission("Modifier le serveur (nom, icône...)", false),
+        edit_properties: new Permission("Modifier les propriétés du serveur", false),
         edit_permissions: new Permission("Modifier les permissions", false),
     }
 
@@ -56,9 +57,12 @@ export default class MinecraftServer{
             }
         }
 
-        fs.writeFileSync(serverPath, JSON.stringify(config))
-
         const server = new this(pathName, config)
+        server.saveConfig()
+    }
+
+    saveConfig(){
+        fs.writeFileSync(path.join(this.path, "config.json"), JSON.stringify(this.config, null, 4))
     }
 
     /**

@@ -23,6 +23,10 @@ ipcMain.on('request', (ipcEvent, event, ...args) => {
     socket.emit(event, ...args)
 });
 
+ipcMain.on('emit', (ipcEvent, event, ...args) => {
+    socket.emit(event, ...args)
+});
+
 ipcMain.on('listen', (ipcEvent, event) => {
     socket.on(event, (...data)=>{
         if(!ipcEvent.sender.isDestroyed())

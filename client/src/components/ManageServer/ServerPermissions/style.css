@@ -1,22 +1,60 @@
 #manage-server{
     display: flex;
     justify-content: center;
-    padding: 0 2em;
     flex-direction: column;
     align-items: center;
 }
 
-h1, h2, .permissions-list{
+#permissions-content-container{
+    display: flex;
+    padding: 0 2em;
+    flex-direction: column;
+    align-items: stretch;
+    width: clamp(20em, 100%);
+    align-self: center;
+}
+
+.permissions-title, .permissions-list{
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    margin: .4em;
+}
+
+.permissions-title{
+    cursor: pointer;
 }
 
 .permissions-list{
     flex-direction: column;
+    margin: 0 1em;
     
     > * {
         display: flex;
-        justify-content: space-between;
-        width: clamp(20em, 100%, 35em);
+        justify-content: space-between; 
+        width: 100%;
+    }
+}
+
+.permissions{
+    background: var(--secondary);
+    margin: 1em 0;
+    border-radius: 1em;
+    position: relative;
+    box-shadow: 4px 4px 12px var(--secondary);
+
+    & .user{
+        background: var(--secondary);
+        margin: 0;
+        padding: 0;
+    }
+}
+
+.permissions-remove-user{
+    color: red;
+    cursor: pointer;
+
+    &:hover{
+        filter: drop-shadow(0 0 4px red);
     }
 }

@@ -25,6 +25,7 @@ export default function Account({userData, developperMode, setDevelopperMode, se
             text="Se déconnecter"
             onClick={()=>{ipcRenderer.send("log-out")}}
             color="red"
+            textColor="white"
         ></Button>
 
         <br/><br/>

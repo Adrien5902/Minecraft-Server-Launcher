@@ -1,0 +1,39 @@
+.permissions-add-someone{
+    font-size: 1.2em;
+    padding: 1em;
+    background: var(--primary);
+    border-radius: 1em;
+    margin-top: 1em;
+
+    & input{
+        border-radius: 0;
+        width: 100%;
+        padding: 0;
+        border: 0;
+    }
+
+    & label{
+        padding-right: .5em;
+        cursor: pointer;
+    }
+}
+
+#permissions-add-someone-search{
+    & .user {
+        cursor: pointer;
+        width: 100%;
+        padding: .5em 0;
+        background: var(--secondary);
+
+        &:hover{
+            box-shadow: 0 0 1em var(--secondary);
+        }
+    }
+
+    &:has(.user){
+        margin-top: .5em;
+        padding-top: .5em;
+        border-top: solid .2em var(--background);
+        border-radius: .1em;
+    }
+}

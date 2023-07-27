@@ -1,8 +1,8 @@
 import './style.css'
 
-export default function User({pfpSize = "128", userData, currentUserId = null}){
+export default function User({pfpSize = "128", userData, currentUserId = null, onClick}){
     const {id: userId, avatar, global_name, discriminator, username} = userData
-    return <div className="user" userid={userId}>
+    return <div className="user" userid={userId} onClick={() => {if(typeof onClick == "function") onClick(userData)}}>
         <img className="pfp" src={`https://cdn.discordapp.com/avatars/${userId}/${avatar}.png?size=${pfpSize}`}/>
         <div className='user-text-wrapper'>
             <span className="global-name">{currentUserId == userId ? "(Moi) " + String(global_name) : String(global_name)}</span>

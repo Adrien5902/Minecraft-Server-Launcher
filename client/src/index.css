@@ -90,3 +90,16 @@ h4{
     justify-content: center;
     align-content: center;
 }
+
+input{
+    display: flex;
+    justify-content: center;
+    outline: 0;
+    border: solid 0.1em var(--secondary);
+    padding: 0.5em;
+    border-radius: 0.5em;
+    font-size: inherit;
+    background: var(--primary);
+    color: var(--text);
+    transition: all 200ms ease;
+}
