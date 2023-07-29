@@ -2,7 +2,7 @@
   "name": "minecraft-sever-launcher",
   "version": "0.0.0",
   "description": "",
-  "main": "src/load.js",
+  "main": "main.js",
   "productName": "Adrien5902 Minecraft Server Launcher",
   "scripts": {
     "start": "electron-forge start",

@@ -2,12 +2,12 @@ module.exports = {
     packagerConfig: {
         asar: false,
         icon: "path/to/app-icon.ico",
-        asarUnpack: [
+        ignore: [
             ".gitignore",
-            "*.config.js",
+            ".config.js",
             ".env",
-            "public/",
-            "**/src/!(load.js)"
+            "public",
+            "src",
         ],
     },
     makers: [
@@ -15,8 +15,8 @@ module.exports = {
             name: "@electron-forge/maker-squirrel",
             platforms: ["win32"],
             config: {
-            name: "MinecraftServerLauncher",
-            description: "A server launcher for Minecraft made by Adrien5902"
+                name: "MinecraftServerLauncher",
+                description: "A server launcher for Minecraft made by Adrien5902"
             },
         },
     ],
