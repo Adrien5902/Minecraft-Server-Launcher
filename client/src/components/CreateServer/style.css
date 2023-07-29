@@ -1,0 +1,41 @@
+.loader{
+    background: var(--primary);
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1em;
+    border-radius: 1em;
+    cursor: pointer;
+    transition: all 300ms ease;
+    width: 14em;
+    margin: 1em 2em;
+
+    & img{
+        height: 10em;
+    }
+
+    & * {
+        margin: .2em;
+    }
+
+    & p {
+        opacity: .5;
+    }
+
+    &:hover, &.selected{
+        box-shadow: 0 0 24px 4px var(--primary);
+        transform: scale(1.1);
+    }
+}
+
+#choose-loader:has(.selected){
+    & .loader:not(.selected){
+        opacity: .5;
+    }
+}
+
+#loader-forge{
+    & img{
+        filter: invert(62%) sepia(57%) saturate(3360%) hue-rotate(329deg) brightness(105%) contrast(101%);
+    }
+}

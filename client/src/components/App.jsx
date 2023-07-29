@@ -5,6 +5,7 @@ import { Routes, Route } from 'react-router-dom';
 import ServerList from "./ServerList";
 import ManageServer from "./ManageServer";
 import Account from "./Account"
+import CreateServer from './CreateServer'
 const { ipcRenderer } = window.require("electron");
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
                     <Route path="/account" element={<Account lightTheme={lightTheme} setTheme={setLightTheme} developperMode={developperMode} setDevelopperMode={setDevelopperMode} userData={userData}></Account>}></Route>
                     <Route path="/manage-server/*" element={<ManageServer developperMode={developperMode}></ManageServer>} ></Route>
                     <Route path="/server" element={<ManageServer developperMode={developperMode} currentUserId={userData?.id}></ManageServer>}></Route>
+                    <Route path="/create-server" element={<CreateServer/>} />
                 </Routes>
             </div>
         </div>

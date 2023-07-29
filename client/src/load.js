@@ -1,3 +1,5 @@
+require('update-electron-app')()
+
 const {domain} = require("../config")
 
 const { app, BrowserWindow, dialog } = require('electron')

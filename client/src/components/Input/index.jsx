@@ -20,7 +20,7 @@ function Input({type, label, value: defaultValue, autoUpdate = false, onChange =
             case "boolean":
                 return <Switch value={value} updateValue={updateValue} onChange={onChange} properties={properties}/>
             default:
-                return <input type="text"/>
+                return <input type="text" value={value ?? ""} placeholder={properties?.placeholder} onChange={(e)=>{setValue(e.target.value); onChange(e.target.value)}}/>
         }
     }
 

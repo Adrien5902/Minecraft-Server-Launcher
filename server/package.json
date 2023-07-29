@@ -20,6 +20,7 @@
   "dependencies": {
     "@mattplays/minecraft-api": "^0.0.2",
     "ath": "^1.0.0",
+    "child_process": "^1.0.2",
     "cors": "^2.8.5",
     "curseforge-api": "^1.1.0",
     "discord-oauth2": "^2.11.0",
