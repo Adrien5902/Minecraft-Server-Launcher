@@ -7,6 +7,10 @@ import MinecraftServer from './MinecraftServer.js'
 import mapObject, { formatSearch, oauth } from '../init.js'
 import DiscordOauth2 from "discord-oauth2"
 import User from './User.js'
+import SpigotMinecraftServer from './SpigotMinecraftServer.js'
+import VanillaMinecraftServer from './VanillaMinecraftServer.js'
+import path from 'path'
+import ForgeMinecraftServer from './ForgeMinecraftServer.js'
 
 export default class SocketUser extends User{
     /**
@@ -151,7 +155,23 @@ export default class SocketUser extends User{
         ).slice(0, 4)
     }
 
-    createServer(name, ){
+    createServer(name, loaderId){
+        MinecraftServer.create(name, this.id)
 
+        // /**@type {VanillaMinecraftServer | SpigotMinecraftServer | ForgeMinecraftServer}*/
+        let server
+        switch (loaderId) {
+            case "forge":
+                server = ForgeMinecraftServer.create()
+                break;
+
+            case "spigot":
+                server = SpigotMinecraftServer.create(name)
+                break;
+        
+            default:
+                server = VanillaMinecraftServer.create()
+                break;
+        }
     }
 }

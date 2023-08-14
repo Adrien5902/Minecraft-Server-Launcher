@@ -9,7 +9,7 @@ export default class User{
     *    username :string
     *    discriminator :string
     *    id :string
-    *    global_name :string | null
+    *    global_name? :string | null
     *    avatar :string | null | undefined
     *    locale? :string
     * }} obj

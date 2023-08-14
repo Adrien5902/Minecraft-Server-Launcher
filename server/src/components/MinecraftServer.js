@@ -40,27 +40,6 @@ export default class MinecraftServer{
 
     static defaultPermissions = mapObject(this.permissions, (perm) => perm.value)
 
-    /**
-     * @param {string} name 
-     * @param {string | number} pathName 
-     * @param {string | null} ownerID 
-     */
-    static create(name, pathName, ownerID){
-        const serverPath = path.join(serverDir, String(pathName))
-        fs.mkdirSync(serverPath)
-
-        let config = {
-            name,
-            owner: ownerID,
-            permissions: {
-                all: this.defaultPermissions
-            }
-        }
-
-        const server = new this(pathName, config)
-        server.saveConfig()
-    }
-
     saveConfig(){
         fs.writeFileSync(path.join(this.path, "config.json"), JSON.stringify(this.config, null, 4))
     }
@@ -110,5 +89,22 @@ export default class MinecraftServer{
 
     setUserPermissions(){
 
+    }
+
+    static create(name, ownerID){
+        const pathName = Math.max(...fs.readdirSync(serverDir).map(name => Number(name)))
+        const serverPath = path.join(serverDir, String(pathName))
+        fs.mkdirSync(serverPath)
+
+        let config = {
+            name,
+            owner: ownerID,
+            permissions: {
+                all: this.defaultPermissions
+            }
+        }
+
+        const server = new this(pathName, config)
+        server.saveConfig()
     }
 }
