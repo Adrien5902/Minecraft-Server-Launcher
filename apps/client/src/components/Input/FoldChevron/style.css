@@ -1,0 +1,19 @@
+.fold-chevron{
+    transition: transform 300ms ease;
+    cursor: pointer;
+    margin: 0 .2em;
+
+    &[data-folded="true"]{
+        transform: rotate(-90deg);
+    }
+}
+
+.folding {
+    overflow: hidden;
+    max-height: 30em;
+    transition: max-height 300ms ease;
+
+    &.folded {
+        max-height: 0;
+    }
+}

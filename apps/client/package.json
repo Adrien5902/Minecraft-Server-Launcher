@@ -1,0 +1,59 @@
+{
+  "name": "minecraft-sever-launcher-client",
+  "version": "0.0.0",
+  "description": "",
+  "main": "main.js",
+  "productName": "Adrien5902 Minecraft Server Launcher Client side, made with react and electron",
+  "scripts": {
+    "start": "electron-forge start",
+    "make": "electron-forge make",
+    "dev": "concurrently -n \"VITE,ELECTRON\" -c \"magenta,cyan\" \"vite dev\" \"nodemon --watch src/main.js --exec electron-forge start\"",
+    "build": "tsc & vite build",
+    "publish": "electron-forge publish"
+  },
+  "author": {
+    "name": "Adrien5902",
+    "email": "adrien.m5902@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Adrien5902/Minecraft-Server-Launcher.git"
+  },
+  "homepage": "./",
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.4.0",
+    "@fortawesome/free-brands-svg-icons": "^6.4.0",
+    "@fortawesome/free-solid-svg-icons": "^6.4.0",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "@testing-library/react": "^13.4.0",
+    "@vitejs/plugin-react": "^4.1.0",
+    "electron-is-dev": "^2.0.0",
+    "electron-store": "^8.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.14.2",
+    "socket.io-client": "^4.7.1",
+    "update-electron-app": "^2.0.1"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^6.2.1",
+    "@electron-forge/maker-squirrel": "",
+    "@electron-forge/publisher-github": "^6.2.1",
+    "concurrently": "^8.2.0",
+    "electron": "^25.3.1",
+    "nodemon": "^3.0.1",
+    "vite": "^4.4.11"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

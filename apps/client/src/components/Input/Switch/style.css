@@ -1,0 +1,39 @@
+.switch{
+    --padding: 12px;
+
+    background-color: var(--primary);
+    display: inline-flex;
+    font-size: 1.5rem;
+    padding: 8px var(--padding);
+    aspect-ratio: 2;
+    height: calc(1em + 8px);
+    position: relative;
+    border-radius: 4px;
+    align-items: center;
+    cursor: pointer;
+    color: white;
+
+    & .switch-icon {
+        transition: all 200ms ease;
+        background: var(--onColor);
+        aspect-ratio: 1;
+        padding: 4px;
+        position: absolute;
+        left: calc(100% - var(--padding));
+        transform: translateX(-100%);
+        border-radius: inherit;
+    }
+
+    &[data-value=false] .switch-icon {
+        left: var(--padding);
+        transform: translateX(0%);
+        background: var(--offColor);
+    }
+}
+
+.switch-inner{
+    background: var(--secondary);
+    height: 90%;
+    width: 100%;
+    border-radius: inherit;
+}
