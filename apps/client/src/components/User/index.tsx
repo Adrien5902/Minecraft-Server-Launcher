@@ -1,8 +1,16 @@
+import { UserResolvable } from '../../types'
 import './style.css'
 
-export default function User({pfpSize = "128", userData, currentUserId = null, onClick}){
+interface Props{
+    pfpSize?: string
+    userData: UserResolvable
+    currentUserId?: string
+    onClick?: (value: any) => void
+}
+
+export default function User({pfpSize = "128", userData, currentUserId = null, onClick}: Props){
     const {id: userId, avatar, global_name, discriminator, username} = userData
-    return <div className="user" userid={userId} onClick={() => {if(typeof onClick == "function") onClick(userData)}}>
+    return <div className="user" data-userid={userId} onClick={() => {if(typeof onClick == "function") onClick(userData)}}>
         <img className="pfp" src={
             avatar ? 
             `https://cdn.discordapp.com/avatars/${userId}/${avatar}.png?size=${pfpSize}` 

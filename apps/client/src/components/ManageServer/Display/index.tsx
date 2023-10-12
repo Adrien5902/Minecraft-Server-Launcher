@@ -11,7 +11,7 @@ function Display({currentUserId, developperMode, serverPathName, currentPermissi
     const [currentOnServer, setCurrentOnServer] = useState(undefined)
     const [serverVignette, setServerVignette] = useState(null)
 
-    function changeServerIcon(iconBuffer){
+    function changeServerIcon(iconBuffer: string){
         request("changeServerIcon", () => setTimeout(()=>{
             request("getServerVignette", setServerVignette, serverPathName)
         }, 1000), serverPathName, iconBuffer)

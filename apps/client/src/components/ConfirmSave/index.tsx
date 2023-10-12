@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Button from '../Input/Button';
 import './style.css'
+import { wrongInputAnimationKeyframes } from '../Input/wrong-input-animation';
 
 function ConfirmSave({onConfirm, onCancel, displayed: d}) {
     const [displayed, setDisplayed] = useState(d)
@@ -15,14 +16,7 @@ function ConfirmSave({onConfirm, onCancel, displayed: d}) {
             e.preventDefault()
         
             ref.current.animate(
-                [
-                    {transform: "translateX(0)"},
-                    {background: "red", transform: "translateX(.7em)"},
-                    {transform: "translateX(-.7em)"},
-                    {transform: "translateX(.7em)"},
-                    {background: "red", transform: "translateX(-.7em)"},
-                    {transform: "translateX(0)"},
-                ], 
+                wrongInputAnimationKeyframes,
                 {duration: 350}
             )
         }

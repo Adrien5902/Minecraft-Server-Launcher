@@ -3,16 +3,18 @@ import Switch from "./Switch";
 import './style.css'
 
 interface Props{
-    type: string
+    type?: string
     label: string | JSX.Element
     value: any
     autoUpdate?: boolean
     onChange: (newValue: any) => unknown
     properties?: any
     index?: number
+    id?: string
+    className?: string
 }
 
-function Input({type, label, value: defaultValue, autoUpdate = false, onChange, properties}: Props) {
+function Input({className, id, type, label, value: defaultValue, autoUpdate = false, onChange, properties}: Props) {
     const [value, setValue] = useState(defaultValue)
 
     function updateValue(newValue){
@@ -34,7 +36,7 @@ function Input({type, label, value: defaultValue, autoUpdate = false, onChange, 
         }
     }
 
-    return <div className="input" data-type={type}>
+    return <div className={"input" + (className ? className : "")} id={id} data-type={type}>
         {label ? <label>{label}</label> : ""}
         {getInput()}
     </div>

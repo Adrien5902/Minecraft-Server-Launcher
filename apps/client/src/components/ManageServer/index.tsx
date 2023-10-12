@@ -2,12 +2,12 @@ import { useEffect, useState } from "react"
 import {request} from "../../socket"
 import "./style.css"
 import Sidebar from './Sidebar'
-import Display from "./Display/"
+import Display from "./Display"
 import ServerPermissions from "./ServerPermissions"
 import { Route, Routes, useSearchParams } from "react-router-dom"
 
 export default function ManageServer({developperMode, currentUserId}){
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams] = useSearchParams();
     const serverPathName = searchParams.get("s")
 
     const [currentPermissions, setCurrentPermissions] = useState(null)
@@ -27,7 +27,6 @@ export default function ManageServer({developperMode, currentUserId}){
                 <Routes>
                     <Route
                         path="/"
-                        developperMode={developperMode}
                         element={<Display 
                             currentPermissions={currentPermissions}
                             serverPathName={serverPathName}

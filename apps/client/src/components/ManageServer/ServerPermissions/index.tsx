@@ -131,10 +131,10 @@ function ServerPermissions({resetPermissions, currentPermissions}) {
                 }
                 let allValue = getAllValue()
 
-                function setAll(value){
+                function setAll(value: boolean, type: string){
                     let perms = permissions.permissions
                     for(const {key} of userPermissions){
-                        perms[userID][key] = value
+                        if(type && typeof perms[userID][key] == type) perms[userID][key] = value
                     }
                     updatePermissions(perms)
                     getAllValue()
@@ -171,7 +171,7 @@ function ServerPermissions({resetPermissions, currentPermissions}) {
                             label={<span><FontAwesomeIcon icon={faLayerGroup}/> Toutes les permissions</span>}
                             autoUpdate={true}
                             value={allValue}
-                            onChange={setAll}
+                            onChange={(v) => setAll(v, "boolean")}
                             key={0}
                         />
                         {

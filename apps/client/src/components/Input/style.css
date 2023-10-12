@@ -1,6 +1,7 @@
 .input{
     display: inline-flex;
     align-items: center;
+    align-items: center;
     margin: 4px;
     
     & label{

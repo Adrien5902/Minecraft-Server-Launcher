@@ -11,7 +11,7 @@ function SidebarButton({icon, text, to}) {
     }, [location.pathname, to]);
 
     return ( 
-    <Link to={to} className="sidebar-button" select={String(selected)}>
+    <Link to={to} className="sidebar-button" data-selected={String(selected)}>
         <div className="sidebar-button-select"></div>
         <div className="sidebar-button-container">
             <FontAwesomeIcon icon={icon}/>

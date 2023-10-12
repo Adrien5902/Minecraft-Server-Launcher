@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react"
 import { formatSearch, request } from "../../socket"
-import ServerVignette from '../SeverVignette'
-import Loading from "./../Loading"
+import ServerVignette from '../SeverVignette/index.tsx'
+import Loading from "../Loading"
 import './style.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEarthAmericas, faMagnifyingGlass, faShareFromSquare, faUserShield } from "@fortawesome/free-solid-svg-icons"
 
+//@ts-ignore
 export default function ServerList({displayPage, setCurrentServerPathName}){
     const [servers, setServers] = useState(null)
 
@@ -22,14 +23,13 @@ export default function ServerList({displayPage, setCurrentServerPathName}){
                 owner={owner}
                 key={index}
                 serverPathName={pathName}
-            >
-            </ServerVignette>)
+            />)
         )
     }
 
-    function searchServer(input){
+    function searchServer(input: string){
         const formatedSearch = formatSearch(input)
-        document.querySelectorAll(".server-vignette").forEach(server => {
+        document.querySelectorAll(".server-vignette").forEach((server: HTMLElement) => {
             server.style.display = formatSearch(server.innerText).includes(formatedSearch) ? "" : "none"
         })
     }

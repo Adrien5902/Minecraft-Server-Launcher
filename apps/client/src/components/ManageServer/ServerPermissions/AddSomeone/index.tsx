@@ -1,21 +1,21 @@
 import { useState } from "react";
 import './style.css'
 import { request } from "../../../../socket";
-import React from "react";
 import User from "../../../User";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { UserResolvable } from "../../../../types";
 
-function AddSomeone({addUser}) {
-    const [searchUsers, setSearchUsers] = useState(null)
+function AddSomeone({addUser}: {addUser: (UserData: UserResolvable) => void}) {
+    const [searchUsers, setSearchUsers] = useState<UserResolvable[]>(null)
 
     function handleUserClick(userData){
-        document.getElementById("permissions-add-someone-input").value = ""
+        (document.getElementById("permissions-add-someone-input") as HTMLInputElement).value = ""
         addUser(userData)
-        search()
+        search("")
     }
     
-    function search(input){
+    function search(input: string){
         if(input) request("searchUsers", setSearchUsers, input)
         else setSearchUsers([])
     }

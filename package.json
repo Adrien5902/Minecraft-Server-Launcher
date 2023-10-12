@@ -15,9 +15,15 @@
       "type": "git",
       "url": "https://github.com/Adrien5902/Minecraft-Server-Launcher.git"
     },
-    "workspaces": [
-        "apps/*"
-    ],
+    "workspaces": {
+        "packages": [
+            "apps/*"
+        ],
+        "nohoist": [
+            "**/electron",
+            "apps/client"
+        ]
+    },
     "license": "ISC",
     "devDependencies": {
         "turbo": "^1.10.15"

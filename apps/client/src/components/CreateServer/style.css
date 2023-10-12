@@ -29,7 +29,7 @@
     }
 }
 
-#choose-loader:has(.selected){
+#loader:has(.selected){
     & .loader:not(.selected){
         opacity: .5;
     }
@@ -38,5 +38,17 @@
 #loader-forge{
     & img{
         filter: invert(62%) sepia(57%) saturate(3360%) hue-rotate(329deg) brightness(105%) contrast(101%);
+    }
+}
+
+.input-box{
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 1em;
+    font-size: 1.3em;
+
+    & > input{
+        margin-left: .5em;
     }
 }

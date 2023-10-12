@@ -22,7 +22,7 @@
     transition: ease 200ms;
     transition-property: opacity;
     
-    &:hover, &[select=true]{
+    &:hover, &[data-selected="true"]{
         .sidebar-button-select{
             width: .25em;
             height: 100%;
@@ -31,7 +31,7 @@
         opacity: 1;
     }
 
-    &[select=true]{
+    &[data-selected="true"]{
         .sidebar-button-select{
             background: var(--accent);
         }
